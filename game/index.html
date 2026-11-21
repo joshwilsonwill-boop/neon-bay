@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Bay: Heat Run</title>
+<style>
+  @font-face {
+    font-family: 'Bebas Neue';
+    src: url('./assets/fonts/bebas-neue.woff2') format('woff2');
+    font-display: swap;
+  }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #1a0f24; }
+  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  #hud {
+    position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between;
+    align-items: flex-start; padding: 14px 20px; pointer-events: none;
+    font-family: 'Bebas Neue', sans-serif; color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8); z-index: 5;
+  }
+  #hud .label { font-size: 15px; letter-spacing: 3px; color: #ffb3d1; }
+  #hud-score { font-size: 44px; line-height: 0.9; }
+  #hud-time { font-size: 44px; line-height: 0.9; text-align: right; }
+  #hud-speed { font-size: 22px; text-align: right; color: #cfe8ff; }
+  #hud-heat { font-size: 34px; letter-spacing: 4px; color: #ffd23a; text-align: center; }
+  #hud .mid { text-align: center; }
+  #banner {
+    position: fixed; top: 110px; left: 50%; transform: translateX(-50%);
+    font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 6px;
+    color: #ffd23a; text-shadow: 0 0 18px rgba(255, 210, 58, 0.7), 0 2px 8px rgba(0, 0, 0, 0.8);
+    pointer-events: none; z-index: 6;
+  }
+  #minimap {
+    position: fixed; right: 18px; bottom: 18px; width: 120px; height: 160px;
+    border: 2px solid rgba(255, 255, 255, 0.35); border-radius: 6px; z-index: 5;
+  }
+  #menu {
+    position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; text-align: center; z-index: 10;
+    background: linear-gradient(rgba(20, 8, 36, 0.25), rgba(20, 8, 36, 0.72));
+    font-family: 'Bebas Neue', sans-serif; color: #fff; padding: 0 24px;
+  }
+  #menu-title {
+    font-size: 84px; letter-spacing: 8px; line-height: 0.95; margin: 0;
+    color: #ff4d8d; text-shadow: 0 0 28px rgba(255, 45, 120, 0.65), 0 4px 12px rgba(0, 0, 0, 0.8);
+  }
+  #menu-body { font-size: 24px; letter-spacing: 1px; max-width: 640px; color: #ffe9f3; margin: 18px 0 8px; }
+  #menu-hint { font-size: 19px; letter-spacing: 3px; color: #ffd23a; }
+  .hidden { display: none !important; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.min.js" } }
+</script>
+</head>
+<body>
+<canvas id="game" aria-label="Neon Bay Heat Run: drive the pink car down Ocean Drive, outrun the police, thread the checkpoint rings"></canvas>
+<div id="hud">
+  <div>
+    <div class="label">SCORE</div>
+    <div id="hud-score">0</div>
+  </div>
+  <div class="mid">
+    <div class="label">HEAT</div>
+    <div id="hud-heat"></div>
+  </div>
+  <div>
+    <div class="label">TIME</div>
+    <div id="hud-time">60s</div>
+    <div id="hud-speed">0 km/h</div>
+  </div>
+</div>
+<div id="banner" class="hidden"></div>
+<canvas id="minimap" width="120" height="160"></canvas>
+<div id="menu">
+  <h1 id="menu-title">NEON BAY: HEAT RUN</h1>
+  <p id="menu-body">Drive the pink car down Ocean Drive at dusk. Outrun the police. Thread the glowing rings. Beat the clock.</p>
+  <p id="menu-hint">WASD or arrows to drive - Space to brake - P to pause</p>
+</div>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
